@@ -43,8 +43,10 @@ typedef enum _meshtastic_TelemetrySensorType {
     /* INA3221 3 Channel Voltage / Current Sensor */
     meshtastic_TelemetrySensorType_INA3221 = 14,
     /* BMP085/BMP180 High accuracy temperature and pressure (older Version of BMP280) */
-    meshtastic_TelemetrySensorType_BMP085 = 15
-} meshtastic_TelemetrySensorType;
+    meshtastic_TelemetrySensorType_BMP085 = 15,
+    /* High accuracy temperature and humidity */
+    meshtastic_TelemetrySensorType_AHTX0 = 16
+    } meshtastic_TelemetrySensorType;
 
 /* Struct definitions */
 /* Key native device metrics such as battery level */

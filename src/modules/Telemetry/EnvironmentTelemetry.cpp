@@ -14,6 +14,7 @@
 #include <OLEDDisplayUi.h>
 
 // Sensors
+#include "Sensor/AHTX0Sensor.h"
 #include "Sensor/BME280Sensor.h"
 #include "Sensor/BME680Sensor.h"
 #include "Sensor/BMP085Sensor.h"
@@ -31,6 +32,7 @@ MCP9808Sensor mcp9808Sensor;
 SHTC3Sensor shtc3Sensor;
 LPS22HBSensor lps22hbSensor;
 SHT31Sensor sht31Sensor;
+AHTX0Sensor ahtx0Sensor;
 
 #define FAILED_STATE_SENSOR_READ_MULTIPLIER 10
 #define DISPLAY_RECEIVEID_MEASUREMENTS_ON_SCREEN true
@@ -89,6 +91,8 @@ int32_t EnvironmentTelemetryModule::runOnce()
                 result = ina219Sensor.runOnce();
             if (ina260Sensor.hasSensor())
                 result = ina260Sensor.runOnce();
+            if (ahtx0Sensor.hasSensor())
+                result = ahtx0Sensor.runOnce();
         }
         return result;
     } else {
@@ -237,6 +241,8 @@ bool EnvironmentTelemetryModule::sendTelemetry(NodeNum dest, bool phoneOnly)
         valid = ina219Sensor.getMetrics(&m);
     if (ina260Sensor.hasSensor())
         valid = ina260Sensor.getMetrics(&m);
+    if (ahtx0Sensor.hasSensor())
+        valid = ahtx0Sensor.getMetrics(&m);
 
     if (valid) {
         LOG_INFO("(Sending): barometric_pressure=%f, current=%f, gas_resistance=%f, relative_humidity=%f, temperature=%f, "
