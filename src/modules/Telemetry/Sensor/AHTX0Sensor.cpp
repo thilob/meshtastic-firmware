@@ -21,8 +21,7 @@ void AHTX0Sensor::setup() {}
 bool AHTX0Sensor::getMetrics(meshtastic_Telemetry *measurement)
 {
 
-    sensors_event_t temp;
-    sensors_event_t humidity;
+    sensors_event_t humidity, temp;
     ahtx0.getEvent(&humidity, &temp);
 
     measurement->variant.environment_metrics.temperature = temp.temperature;
